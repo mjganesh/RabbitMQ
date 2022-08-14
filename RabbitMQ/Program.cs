@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RabbitMQ.Producer;
+using RabbitMQ;
 using System.Text;
 
 Console.WriteLine("RabbitMQ!");
@@ -23,9 +23,9 @@ for (int i = 1; i <= 10; i++)
     SendMessage(book);
     Console.WriteLine($"published=>{book.Id}-SiNo-{book.SiNo }");
 }
-Console.ReadKey();
 
 ReceiveMessage();
+Console.ReadKey();
 
 static void SendMessage<T>(T message)
 {
@@ -48,8 +48,8 @@ static void SendMessage<T>(T message)
     var json = JsonConvert.SerializeObject(message);
     var body = Encoding.UTF8.GetBytes(json);
 
-    //put the data on to the product queue
-    channel.BasicPublish(exchange: "", routingKey: "book", body: body);
+    //put the data on to the  queue
+    channel.BasicPublish(exchange: "book", routingKey: "book", body: body);
 }
 
 

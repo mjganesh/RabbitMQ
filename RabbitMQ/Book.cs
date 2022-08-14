@@ -1,4 +1,4 @@
-﻿namespace RabbitMQ.Producer
+﻿namespace RabbitMQ
 {
     internal class Book
     {
